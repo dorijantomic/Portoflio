@@ -10,10 +10,10 @@ const About = () => {
               About Me
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed">
-              I'm a passionate full-stack developer who thrives on building
-              scalable web applications. When I'm not coding, you can find me
-              hitting the gym, running, or exploring the great outdoors. I'm a
-              firm believer in a healthy body, healthy mind.
+              I&apos;m a passionate full-stack developer who thrives on building
+              scalable web applications. When I&apos;m not coding, you can find
+              me hitting the gym, running, or exploring the great outdoors.
+              I&apos;m a firm believer in a healthy body, healthy mind.
             </p>
           </div>
 

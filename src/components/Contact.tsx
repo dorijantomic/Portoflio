@@ -6,11 +6,12 @@ const Contact = () => {
       <div className="container mx-auto px-6 text-center">
         <div className="animate-on-scroll mb-16">
           <h2 className="text-4xl lg:text-6xl font-bold gradient-text mb-6">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            I'm always interested in new opportunities and exciting projects.
-            Drop me a line and let's create something amazing together.
+            I&apos;m always interested in new opportunities and exciting
+            projects. Drop me a line and let&apos;s create something amazing
+            together.
           </p>
         </div>
 

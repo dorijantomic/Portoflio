@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const Hero = () => {
@@ -19,7 +20,7 @@ const Hero = () => {
         <div className="space-y-8">
           <div className="animate-on-scroll">
             <h1 className="text-6xl lg:text-8xl font-bold leading-none">
-              Hey, I'm{" "}
+              Hey, I&apos;m{" "}
               <span className="gradient-text block">Dorijan Tomić</span>
             </h1>
           </div>
@@ -39,7 +40,7 @@ const Hero = () => {
             style={{ animationDelay: "0.4s" }}
           >
             <button className="group relative px-8 py-4 bg-accent hover:bg-accent/80 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
-              <span className="relative z-10">Let's Connect</span>
+              <span className="relative z-10">Let&apos;s Connect</span>
               <div className="absolute inset-0 bg-accent rounded-full animate-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             <div className="flex space-x-4">
@@ -90,7 +91,7 @@ const Hero = () => {
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-accent via-purple-600 to-pink-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-glow"></div>
             <div className="relative">
-              <img
+              <Image
                 src="/19276806.jpg"
                 alt="Dorijan Tomić"
                 className="w-80 h-80 rounded-full object-cover border-4 border-white/10"
