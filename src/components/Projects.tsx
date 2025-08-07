@@ -3,8 +3,8 @@ import AnimatedWrapper from "./AnimatedWrapper";
 
 const Projects = () => {
   return (
-    <AnimatedWrapper>
-      <section id="projects" className="py-24 relative">
+    <AnimatedWrapper id="projects">
+      <section className="py-24 relative">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-6xl font-bold gradient-text mb-6">

@@ -1,59 +1,175 @@
-import React from "react";
+"use client";
 
-const Navbar = () => {
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useFramerScroll } from "../hooks/useFramerScroll.js";
+
+const AdvancedNavbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const { scrollToSection } = useFramerScroll();
+
+  const handleNavClick = async (sectionId: string) => {
+    await scrollToSection(sectionId);
+    setIsMenuOpen(false);
+  };
+
+  // Track active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["about", "knowledge", "projects", "contact"];
+      const navbarHeight = 120;
+
+      const currentSection = sections.find((section) => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= navbarHeight && rect.bottom > navbarHeight;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navItems = [
+    { id: "about", label: "About" },
+    { id: "knowledge", label: "Knowledge" },
+    { id: "projects", label: "Projects" },
+    { id: "contact", label: "Contact" },
+  ];
+
   return (
-    <nav
-      className="fixed top-0 w-full z-40 transition-all duration-300"
-      id="navbar"
+    <motion.nav
+      className="fixed top-0 w-full z-40 glass backdrop-blur-xl"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex justify-between items-center">
-          <div className="text-xl font-bold gradient-text">DT</div>
+          <motion.div
+            className="text-xl font-bold gradient-text cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleNavClick("home")}
+          >
+            DT
+          </motion.div>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            <a
-              href="#about"
-              className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#knowledge"
-              className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
-            >
-              Knowledge
-            </a>
-            <a
-              href="#projects"
-              className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
-            >
-              Projects
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
-            >
-              Contact
-            </a>
+            {navItems.map((item, index) => (
+              <motion.button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`relative transition-colors duration-300 font-medium ${
+                  activeSection === item.id ? "text-white" : "text-gray-300"
+                }`}
+                whileHover={{
+                  scale: 1.05,
+                  color: "#ffffff",
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                {item.label}
+                {/* Hover effect */}
+                <motion.span
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-accent to-purple-500 rounded-full"
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  whileHover={{ scaleX: 1, opacity: 0.5 }}
+                  animate={{
+                    scaleX: activeSection === item.id ? 1 : 0,
+                    opacity: activeSection === item.id ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+            ))}
           </div>
-          <button className="md:hidden text-white">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+
+          {/* Mobile menu button */}
+          <motion.button
+            className="md:hidden text-white p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            whileTap={{ scale: 0.9 }}
+          >
+            <motion.div
+              animate={isMenuOpen ? "open" : "closed"}
+              className="flex flex-col space-y-1 w-5 h-4 justify-center items-center"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
+              <motion.span
+                variants={{
+                  closed: { rotate: 0, y: 0 },
+                  open: { rotate: 45, y: 6 },
+                }}
+                className="w-5 h-0.5 bg-white block transition-all"
+              />
+              <motion.span
+                variants={{
+                  closed: { opacity: 1 },
+                  open: { opacity: 0 },
+                }}
+                className="w-5 h-0.5 bg-white block transition-all"
+              />
+              <motion.span
+                variants={{
+                  closed: { rotate: 0, y: 0 },
+                  open: { rotate: -45, y: -6 },
+                }}
+                className="w-5 h-0.5 bg-white block transition-all"
+              />
+            </motion.div>
+          </motion.button>
         </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              className="md:hidden mt-4"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+            >
+              <motion.div className="py-4 space-y-2 glass rounded-lg">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors rounded-lg ${
+                      activeSection === item.id
+                        ? "text-white bg-white/15"
+                        : "text-gray-300 hover:text-white hover:bg-white/10"
+                    }`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.02, x: 8 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
-export default Navbar;
+export default AdvancedNavbar;

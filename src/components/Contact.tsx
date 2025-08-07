@@ -3,8 +3,8 @@ import AnimatedWrapper from "./AnimatedWrapper";
 
 const Contact = () => {
   return (
-    <AnimatedWrapper>
-      <section id="contact" className="py-24 relative">
+    <AnimatedWrapper id="contact">
+      <section className="py-24 relative">
         <div className="container mx-auto px-6 text-center">
           <div className="mb-16">
             <h2 className="text-4xl lg:text-6xl font-bold gradient-text mb-6">
