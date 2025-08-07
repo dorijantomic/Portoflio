@@ -14,24 +14,27 @@ const AdvancedNavbar = () => {
     setIsMenuOpen(false);
   };
 
-  // Track active section
   useEffect(() => {
     const handleScroll = () => {
       const sections = ["about", "knowledge", "projects", "contact"];
       const navbarHeight = 120;
 
-      const currentSection = sections.find((section) => {
+      let currentSection = "";
+      for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= navbarHeight && rect.bottom > navbarHeight;
+          if (rect.top <= navbarHeight) {
+            currentSection = section;
+          }
         }
-        return false;
-      });
-
-      if (currentSection) {
-        setActiveSection(currentSection);
       }
+
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        currentSection = "contact";
+      }
+
+      setActiveSection(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -65,7 +68,6 @@ const AdvancedNavbar = () => {
             DT
           </motion.div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item, index) => (
               <motion.button
@@ -84,7 +86,7 @@ const AdvancedNavbar = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 {item.label}
-                {/* Hover effect */}
+
                 <motion.span
                   className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-accent to-purple-500 rounded-full"
                   initial={{ scaleX: 0, opacity: 0 }}
@@ -99,7 +101,6 @@ const AdvancedNavbar = () => {
             ))}
           </div>
 
-          {/* Mobile menu button */}
           <motion.button
             className="md:hidden text-white p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -134,7 +135,6 @@ const AdvancedNavbar = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Navigation */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

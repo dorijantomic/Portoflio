@@ -78,6 +78,10 @@
 
 /* COMPONENT STYLES - For complex selectors that can't be utilities */
 @component {
+  main {
+    padding-bottom: 50vh;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
