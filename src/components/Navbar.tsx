@@ -75,7 +75,7 @@ const AdvancedNavbar = () => {
           {isProjectPage ? (
             <Link
               href="/"
-              className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2"
+              className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 cursor-pointer"
             >
               <svg
                 className="w-4 h-4"
@@ -98,12 +98,13 @@ const AdvancedNavbar = () => {
                 <motion.button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`relative transition-colors duration-300 font-medium ${
-                    activeSection === item.id ? "text-white" : "text-gray-300"
+                  className={`relative transition-colors duration-300 font-medium cursor-pointer ${
+                    activeSection === item.id
+                      ? "text-white"
+                      : "text-gray-300 hover:text-white"
                   }`}
                   whileHover={{
                     scale: 1.05,
-                    color: "#ffffff",
                   }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: -20 }}
@@ -177,7 +178,7 @@ const AdvancedNavbar = () => {
                   <motion.button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors rounded-lg ${
+                    className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors rounded-lg cursor-pointer ${
                       activeSection === item.id
                         ? "text-white bg-white/15"
                         : "text-gray-300 hover:text-white hover:bg-white/10"
