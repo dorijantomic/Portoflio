@@ -13,21 +13,20 @@ const Projects = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="animate-on-scroll glass rounded-2xl p-6">
               <h3 className="text-2xl font-bold mb-4 gradient-text">
-                Lost & Found / Pet Matching App
+                Incoming
               </h3>
               <p className="text-gray-300">
-                A full-stack application built with Next.js, Prisma, and
-                Supabase. Features include animal listings, comments,
-                notifications, messaging, and reporting.
+                New project is on its way, stay tuned for something amazing!
               </p>
             </div>
             <div className="animate-on-scroll glass rounded-2xl p-6">
               <h3 className="text-2xl font-bold mb-4 gradient-text">
-                Notes App
+                Modern Notes App
               </h3>
               <p className="text-gray-300">
-                A notes application created as part of a 14-day challenge, using
-                Next.js, Supabase, Prisma, and React Hook Form.
+                A full-stack notes application built as part of a 1-day
+                challenge. Tech stack includes Next.js 15, React 19, Prisma,
+                PostgreSQL, and custom JWT authentication.
               </p>
               <a
                 href="/projects/note-app"
@@ -35,6 +34,14 @@ const Projects = () => {
               >
                 View Project
               </a>
+            </div>
+            <div className="animate-on-scroll glass rounded-2xl p-6">
+              <h3 className="text-2xl font-bold mb-4 gradient-text">
+                Incoming
+              </h3>
+              <p className="text-gray-300">
+                New project is on its way, stay tuned for something amazing!
+              </p>
             </div>
           </div>
         </div>
