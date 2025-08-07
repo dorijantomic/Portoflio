@@ -92,6 +92,8 @@ const Hero = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-accent via-purple-600 to-pink-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-glow"></div>
             <div className="relative">
               <Image
+                height={200}
+                width={200}
                 src="/19276806.jpg"
                 alt="Dorijan Tomić"
                 className="w-80 h-80 rounded-full object-cover border-4 border-white/10"

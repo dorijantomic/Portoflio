@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import React from "react";
 
 interface AnimatedWrapperProps {
   children: React.ReactNode;
@@ -10,42 +11,15 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({
   children,
   delay = 0,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, observerOptions);
-
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      className="animate-on-scroll"
-      style={{ transitionDelay: `${delay}s` }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6 }}
+      viewport={{ once: true }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 

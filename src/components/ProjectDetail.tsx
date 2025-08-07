@@ -229,7 +229,7 @@ const ProjectDetail = () => {
                 href="../index.html#contact"
                 className="bg-accent hover:bg-accent/80 rounded-full px-8 py-4 transition-all duration-300 transform hover:scale-105 font-semibold"
               >
-                Let's Connect
+                let&apos;s Connect
               </a>
             </div> */}
           </div>
