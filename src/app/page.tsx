@@ -1,14 +1,16 @@
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
+import Knowledge from "@/components/Knowledge";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <About />
-      <Skills />
+      <Knowledge />
+      <Projects />
       <Contact />
     </main>
   );

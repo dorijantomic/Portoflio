@@ -17,10 +17,16 @@ const Navbar = () => {
               About
             </a>
             <a
-              href="#skills"
+              href="#knowledge"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
             >
-              Skills
+              Knowledge
+            </a>
+            <a
+              href="#projects"
+              className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
+            >
+              Projects
             </a>
             <a
               href="#contact"
