@@ -8,7 +8,7 @@ const Hero = () => {
   const { scrollToSection } = useFramerScroll();
   return (
     <AnimatedWrapper>
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-28">
+      <section className="flex items-center justify-center relative overflow-hidden pt-28 pb-20">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float"></div>
           <div

@@ -103,7 +103,7 @@ const ContributionHeatmap = () => {
   return (
     <div className="flex flex-col gap-2 glass p-4 rounded-lg" ref={containerRef}>
       <h2 className="text-lg font-bold text-white">{totalContributions} contributions in the last year</h2>
-      <div className="relative">
+      <div className="relative overflow-x-auto">
         <div className="flex gap-1 text-xs text-gray-400 mb-2">
             {monthLabels.map(m => <span key={m.month} style={{ position: 'absolute', left: `${m.index * 0.875}rem` }}>{m.month}</span>)}
         </div>

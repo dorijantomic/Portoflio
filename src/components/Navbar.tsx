@@ -62,8 +62,8 @@ const AdvancedNavbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex justify-between items-center">
+      <div className="w-full max-w-full md:max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 flex-wrap">
           <motion.div
             className="text-xl font-bold gradient-text cursor-pointer"
             whileHover={{ scale: 1.05 }}
