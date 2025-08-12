@@ -1,5 +1,6 @@
 import React from "react";
 import AnimatedWrapper from "./AnimatedWrapper";
+import ContributionHeatmap from "./ContributionHeatmap";
 
 const About = () => {
   return (
@@ -44,6 +45,9 @@ const About = () => {
                 <h3 className="text-xl font-semibold mb-2">Passion</h3>
                 <p className="text-gray-300">Building Digital Experiences</p>
               </div>
+            </div>
+            <div className="mt-16">
+              <ContributionHeatmap />
             </div>
           </div>
         </div>

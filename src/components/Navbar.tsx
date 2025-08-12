@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useFramerScroll } from "../hooks/useFramerScroll.js";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import CodingStreakTracker from "./CodingStreakTracker";
 
 const AdvancedNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -127,6 +128,9 @@ const AdvancedNavbar = () => {
               ))}
             </div>
           )}
+          <div className="hidden md:block">
+            <CodingStreakTracker />
+          </div>
 
           {!isProjectPage && (
             <motion.button
@@ -192,6 +196,9 @@ const AdvancedNavbar = () => {
                     {item.label}
                   </motion.button>
                 ))}
+                <div className="px-4 py-3">
+                  <CodingStreakTracker />
+                </div>
               </motion.div>
             </motion.div>
           )}
