@@ -1,7 +1,18 @@
+"use client";
 import React from "react";
 import AnimatedWrapper from "./AnimatedWrapper";
+import { projects } from "@/lib/projects";
+import { usePathname } from "next/navigation";
 
 const ProjectDetail = () => {
+  const pathname = usePathname();
+  const projectId = pathname.split("/").pop() as keyof typeof projects;
+  const project = projects[projectId];
+
+  if (!project) {
+    return <div>Project not found</div>;
+  }
+
   return (
     <>
       <AnimatedWrapper>
@@ -14,18 +25,16 @@ const ProjectDetail = () => {
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <h1 className="text-5xl lg:text-7xl font-bold gradient-text mb-6">
-                Modern Notes App
+                {project.title}
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                A modern, full-stack notes application built with the latest
-                technologies, featuring a robust backend, a sleek frontend, and
-                secure authentication.
+                {project.description}
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
               <a
-                href="https://notes-sage-omega.vercel.app/auth/login"
+                href={project.liveDemoUrl}
                 target="_blank"
                 className="glass rounded-full px-8 py-4 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3"
               >
@@ -45,7 +54,7 @@ const ProjectDetail = () => {
                 <span className="font-semibold">Live Demo</span>
               </a>
               <a
-                href="mailto:doriantomic@gmail.com?subject=Request for code: Modern Notes App"
+                href={project.requestCodeUrl}
                 target="_blank"
                 className="glass rounded-full px-8 py-4 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3"
               >
@@ -70,96 +79,18 @@ const ProjectDetail = () => {
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="glass rounded-2xl p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-4">
-                  Core Framework
-                </h3>
-                <ul className="text-gray-300 leading-relaxed space-y-2">
-                  <li>
-                    <strong>Next.js 15:</strong> App Router, Server Actions,
-                    Edge Runtime
-                  </li>
-                </ul>
-              </div>
-
-              <div className="glass rounded-2xl p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-4">
-                  Frontend
-                </h3>
-                <ul className="text-gray-300 leading-relaxed space-y-2">
-                  <li>
-                    <strong>React 19:</strong> UI Library
-                  </li>
-                  <li>
-                    <strong>shadcn/ui:</strong> Radix UI & Tailwind CSS
-                  </li>
-                  <li>
-                    <strong>Styling:</strong> Tailwind CSS
-                  </li>
-                  <li>
-                    <strong>Icons:</strong> Lucide React
-                  </li>
-                </ul>
-              </div>
-
-              <div className="glass rounded-2xl p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-4">
-                  Backend
-                </h3>
-                <ul className="text-gray-300 leading-relaxed space-y-2">
-                  <li>
-                    <strong>ORM:</strong> Prisma
-                  </li>
-                  <li>
-                    <strong>Database:</strong> PostgreSQL
-                  </li>
-                </ul>
-              </div>
-
-              <div className="glass rounded-2xl p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-4">
-                  Authentication & Security
-                </h3>
-                <ul className="text-gray-300 leading-relaxed space-y-2">
-                  <li>
-                    <strong>Auth:</strong> Custom JWT-based sessions
-                  </li>
-                  <li>
-                    <strong>JWT Library:</strong> @oslojs/jwt
-                  </li>
-                  <li>
-                    <strong>Crypto:</strong> @oslojs/crypto (HMAC)
-                  </li>
-                  <li>
-                    <strong>Password Hashing:</strong> oslo/password (Argon2id)
-                  </li>
-                </ul>
-              </div>
-
-              <div className="glass rounded-2xl p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-4">
-                  Forms & Validation
-                </h3>
-                <ul className="text-gray-300 leading-relaxed space-y-2">
-                  <li>
-                    <strong>Form Management:</strong> React Hook Form
-                  </li>
-                  <li>
-                    <strong>Schema Validation:</strong> Zod
-                  </li>
-                </ul>
-              </div>
-
-              <div className="glass rounded-2xl p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-4">
-                  API & Services
-                </h3>
-                <ul className="text-gray-300 leading-relaxed space-y-2">
-                  <li>
-                    <strong>Email Service:</strong> Resend
-                  </li>
-                </ul>
-              </div>
+              {project.techStack.map((stack) => (
+                <div className="glass rounded-2xl p-8" key={stack.category}>
+                  <h3 className="text-2xl font-bold gradient-text mb-4">
+                    {stack.category}
+                  </h3>
+                  <ul className="text-gray-300 leading-relaxed space-y-2">
+                    {stack.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -171,29 +102,14 @@ const ProjectDetail = () => {
               Developer Experience
             </h2>
             <div className="glass rounded-2xl p-8 grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-accent mb-3">
-                  TypeScript
-                </h3>
-                <p className="text-gray-300">
-                  Static typing for improved code quality and maintainability.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-accent mb-3">ESLint</h3>
-                <p className="text-gray-300">
-                  Enforces consistent code style and catches errors early.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-accent mb-3">
-                  Database Seeding
-                </h3>
-                <p className="text-gray-300">
-                  Scripts run with `tsx` to populate the database with initial
-                  data.
-                </p>
-              </div>
+              {project.developerExperience.map((exp) => (
+                <div key={exp.title}>
+                  <h3 className="text-xl font-bold text-accent mb-3">
+                    {exp.title}
+                  </h3>
+                  <p className="text-gray-300">{exp.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -205,18 +121,14 @@ const ProjectDetail = () => {
               Deployment & DevOps
             </h2>
             <div className="glass rounded-2xl p-8 grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-accent mb-3">Hosting</h3>
-                <p className="text-gray-300">
-                  Deployed on Vercel, optimized for Next.js applications.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-accent mb-3">CI/CD</h3>
-                <p className="text-gray-300">
-                  Continuous integration and deployment managed through GitHub.
-                </p>
-              </div>
+              {project.deployment.map((dep) => (
+                <div key={dep.title}>
+                  <h3 className="text-xl font-bold text-accent mb-3">
+                    {dep.title}
+                  </h3>
+                  <p className="text-gray-300">{dep.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -232,20 +144,6 @@ const ProjectDetail = () => {
                 Check out my other projects or get in touch to discuss your next
                 idea.
               </p>
-              {/* <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href="../index.html#projects"
-                className="glass rounded-full px-8 py-4 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 font-semibold"
-              >
-                View All Projects
-              </a>
-              <a
-                href="../index.html#contact"
-                className="bg-accent hover:bg-accent/80 rounded-full px-8 py-4 transition-all duration-300 transform hover:scale-105 font-semibold"
-              >
-                let's Connect
-              </a>
-            </div> */}
             </div>
           </div>
         </section>
